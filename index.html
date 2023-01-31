@@ -54,12 +54,6 @@
         font-weight: 500;
         color: white;
       }
-      #header {
-        background-color: aqua;
-      }
-      .audio {
-        width: 100%;
-      }
       #image1 {
         background-image: url("./img1.jpeg");
       }
@@ -94,8 +88,112 @@
         opacity: 1;
         transition: opacity 0.5s linear;
       }
+      /**************** 시크릿 코드(CSS) 시작 ****************/
+      @keyframes rtanee {
+        0% {
+          bottom: 0px;
+        }
+        100% {
+          bottom: 100px;
+        }
+      }
+
+      .absolute-rtan-area {
+        position: fixed;
+        right: 10px;
+        bottom: 10px;
+
+        /* 아이콘 이동 애니메이션 관련 설정 */
+        animation-name: rtanee;
+        animation-duration: 2s;
+        animation-duration: linear;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        animation-fill-mode: forwards;
+      }
+
+      .absolute-rtan-area img {
+        width: 150px;
+        cursor: pointer;
+      }
+
+      #modal.modal-overlay {
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(1.5px);
+        border-radius: 10px;
+        display: none;
+      }
+
+      #modal .modal-window {
+        background: white;
+        box-shadow: 0 8px 32px 0 grey;
+        backdrop-filter: blur(13.5px);
+        -webkit-backdrop-filter: blur(13.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        width: 350px;
+        height: 350px;
+        position: relative;
+        padding: 10px;
+      }
+
+      #modal .close-area {
+        display: inline;
+        float: right;
+        padding-right: 10px;
+        cursor: pointer;
+        color: black;
+        position: absolute;
+        right: 0;
+      }
+
+      #modal .content {
+        margin-top: 10px;
+        padding: 0px 10px;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #modal .content img {
+        width: 65%;
+        margin-top: 30px;
+        margin-bottom: 20px;
+      }
+
+      #modal .content span {
+        font-size: 20px;
+        margin: 2px;
+        font-weight: 900;
+        font-family: auto;
+      }
+
+      #modal .content button {
+        position: absolute;
+        bottom: 20px;
+        width: 90%;
+        height: 50px;
+        color: white;
+        background: green;
+        border: 0;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      /**************** 시크릿 코드(CSS) 종료 ****************/
     </style>
     <script>
+      // 텍스트가 보여지는 기능
       function showText(number) {
         if (number === 1) {
           document.querySelector("#desc1").classList.remove("hideText");
@@ -108,6 +206,8 @@
           document.querySelector("#desc3").classList.add("showText");
         }
       }
+
+      // 텍스트가 감춰지는 기능
       function hideText(number) {
         if (number === 1) {
           document.querySelector("#desc1").classList.remove("showText");
@@ -123,54 +223,88 @@
       function alertText(number) {
         alert(`${number}번째 추억이에요! 눌러주셔서 감사합니다 :)`);
       }
+
+      /**************** 시크릿 코드(JS) 시작 ****************/
+      function showModal() {
+        const modal = document.getElementById("modal");
+        modal.style.display = "flex";
+      }
+
+      function closeModal() {
+        const modal = document.getElementById("modal");
+        modal.style.display = "none";
+      }
+      /**************** 시크릿 코드(JS) 종료 ****************/
     </script>
   </head>
   <body>
     <div class="container">
-      <div
-        onmouseover="hideText(1)"
-        onmouseout="showText(1)"
-        onclick="alertText(1)"
-        class="photo-frame"
-        id="image1"
-      >
-        <span id="desc1" class="photo-description"
-          >2022.04. 월미도에서 우리!</span
+      <div class="photos">
+        <div
+          onmouseover="hideText(1)"
+          onmouseout="showText(1)"
+          onclick="alertText(1)"
+          class="photo-frame"
+          id="image1"
         >
-      </div>
-      <div
-        onmouseover="hideText(2)"
-        onmouseout="showText(2)"
-        onclick="alertText(2)"
-        class="photo-frame"
-        id="image2"
-      >
-        <span id="desc2" class="photo-description">
-          2022.07. 무대 준비하면서 긴장했었잖아 ><
-        </span>
-      </div>
-      <div
-        onmouseover="hideText(3)"
-        onmouseout="showText(3)"
-        onclick="alertText(3)"
-        class="photo-frame"
-        id="image3"
-      >
-        <span id="desc3" class="photo-description"
-          >2021.11. 많이 변하긴 했다 그치 ㅠㅠ</span
+          <span id="desc1" class="photo-description"
+            >2022.04. 월미도에서 우리!</span
+          >
+        </div>
+        <div
+          onmouseover="hideText(2)"
+          onmouseout="showText(2)"
+          onclick="alertText(2)"
+          class="photo-frame"
+          id="image2"
         >
-      </div>
-      <div class="photo-frame">
-        <iframe
-          class="video"
-          src="https://www.youtube.com/embed/agYZbSt-3LY"
-          frameborder="0"
-        ></iframe>
+          <span id="desc2" class="photo-description">
+            2022.07. 무대 준비하면서 긴장했었잖아 ><
+          </span>
+        </div>
+        <div
+          onmouseover="hideText(3)"
+          onmouseout="showText(3)"
+          onclick="alertText(3)"
+          class="photo-frame"
+          id="image3"
+        >
+          <span id="desc3" class="photo-description"
+            >2021.11. 많이 변하긴 했다 그치 ㅠㅠ</span
+          >
+        </div>
+        <div class="photo-frame">
+          <iframe
+            class="video"
+            src="https://www.youtube.com/embed/agYZbSt-3LY"
+            frameborder="0"
+          ></iframe>
+        </div>
       </div>
       <div class="footer">
         <p class="f-title">Happy Lunch Time</p>
         <p class="f-date">2023.01.23</p>
       </div>
     </div>
+    <!-- ✭✭✭✭✭✭✭✭✭✭✭✭✭✭ 시크릿 코드 시작(HTML) ✭✭✭✭✭✭✭✭✭✭✭✭✭✭ -->
+    <!-- 르탄이 아이콘 영역 -->
+    <div class="absolute-rtan-area">
+      <img src="./rtan.png" onclick="showModal()" />
+    </div>
+    <!-- 모달 영역 -->
+    <div id="modal" class="modal-overlay">
+      <div class="modal-window">
+        <div class="close-area" onclick="closeModal()">𝗫</div>
+        <div class="content">
+          <img src="./rtans.png" />
+          <span>여기까지 온 당신</span>
+          <span>개발자가 적성일지도?</span>
+          <button onclick="location.href='https://nbcamp.oopy.io/'">
+            0원으로 개발자 시작하기
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- ✭✭✭✭✭✭✭✭✭✭✭✭✭✭ 시크릿 코드 시작(HTML) ✭✭✭✭✭✭✭✭✭✭✭✭✭✭ -->
   </body>
 </html>
